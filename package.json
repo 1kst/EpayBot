@@ -1,0 +1,16 @@
+{
+  "name": "node-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "moment": "^2.29.4",
+    "mysql": "^2.18.1",
+    "node-schedule": "^2.1.1",
+    "telebot": "^1.4.1"
+  }
+}
