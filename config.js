@@ -5,6 +5,12 @@ exports.dbInfo = {
   password : 'root',//密码
   database : 'mydb'//数据库名
 };
+//通知在以下时间内的订单 示例为通知自现在时间开始1h以前的订单
+exports.notify = {
+	count:10,//每次处理的订单数
+	time:"1",//时间
+	timeUnit:"hours",//时间单位 可填seconds minutes hours days months years
+}
 exports.botInfo ={
     token: "", // 机器人密钥（向@bot_father申请）
 	//轮询模式，无需域名

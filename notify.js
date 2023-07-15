@@ -2,6 +2,7 @@ const db =  require("./Toolkits/dataBase.js");
 const moment = require('moment');
 const schedule = require('node-schedule');
 const Telebot = require("./bot.js");
+const {notify} = require("./config.js");
 
 // 启动任务
 let job = schedule.scheduleJob('* * * * * *', () => {
@@ -14,8 +15,8 @@ let job = schedule.scheduleJob('* * * * * *', () => {
   	})
   })
   let today = moment();
-  let pretime = today.subtract(5, 'days').format('YYYY-MM-DD HH:mm:ss');
-  db("SELECT * FROM pay_order WHERE endtime >= ? AND param is NULL ORDER BY trade_no DESC Limit 1"
+  let pretime = today.subtract(notify.time, notify.timeUnit).format('YYYY-MM-DD HH:mm:ss');
+  db("SELECT * FROM pay_order WHERE endtime >= ? AND param is NULL ORDER BY trade_no ASC Limit "+notify.count
   ,[pretime])
   .then((r)=>{
   	if(r.length == 0){
