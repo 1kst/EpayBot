@@ -19,9 +19,9 @@ exports.botInfo ={
         timeout: 0, // 可选， 更新消息超市时间 (0 - 短轮询).
         limit: 100, // 可选， 限制检索更新的数量。
         retryTimeout: 5000, // 可选， 重新连接超时（单位毫秒毫秒）。
-        proxy: 'http://:@localhost:7890' ,// 可选， 要使用的HTTP代理。
+        proxy: '' ,// 可选， 要使用的HTTP代理。
 		//如果机器在国外此处请留空。
-		//如果机器在国内请自行寻找代理节点并填入，如上为使用clash进行代理的配置。
+		//如果机器在国内请自行寻找代理节点并填入，http://:@localhost:7890 为使用clash进行代理的配置。
     },
 	usePlugins: ['askUser','regExpMessage','shortReply'], // 可选。使用pluginFolder中的用户插件。
     allowedUpdates: [], // 可选。列出希望机器人接收的更新类型。指定一个空列表以接收所有更新。
