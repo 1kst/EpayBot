@@ -6,6 +6,16 @@
 
 代码开源，没有授权及各种费用，随意查看使用和下载。
 
+## 使用方式
+
+/start 呼出主菜单
+
+<img src="README.assets/image-20230715160343729.png" alt="image-20230715160343729" style="zoom:50%;" />
+
+/bind 商户号 密钥 绑定账户
+
+<img src="README.assets/image-20230715160331587.png" alt="image-20230715160331587" style="zoom:50%;" />
+
 ## 使用删库塔安装
 
 1. 从软件商店中安装PM2管理器
@@ -36,10 +46,8 @@
 
 7. 最后点击启动，项目即可正常启动。
    
-   
-   
 
-# 3.获得帮助
+## 获得帮助
 
 https://t.me/TalkToJshi
 
