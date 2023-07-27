@@ -55,6 +55,79 @@
 
 7. 最后点击启动，项目即可正常启动。
 
+## 从命令行安装
+
+1. 安装nvm
+
+   [官方文档 nvm-sh/nvm (github.com)](https://github.com/nvm-sh/nvm/blob/master/README.md#installing-and-updating)
+
+   请按上述官方文档或者谷歌搜索对应系统的安装方式
+
+2. ```shell
+   # 安装最新版本
+   nvm install node
+   ```
+
+3. ```shell
+   # 查看可用版本
+   nvm ls
+   ```
+
+   ![image-20230727201718102](README.assets/image-20230727201718102.png)
+
+4. ```shell
+   # 切换版本 版本号按上步骤显示的填
+   nvm use 18.12.0
+   ```
+
+5. 将代码下载到本机下，教程以/www/wwwroot/epaybot目录为例
+
+   并填写config.js里的配置，其中数据库为易支付的数据库。
+
+   **==请认真阅读config.js里面的注释==**
+
+6. ```shell
+   #创建/etc/systemd/system/epaybot.service文件并在文件填写以下内容
+   #以nano为例
+   sudo nano /etc/systemd/system/epaybot.service
+   ```
+
+7. ```ini
+   [Unit]
+   Description=Epaybot Service
+   After=network.target
+   Wants=network.target
+   
+   [Service]
+   Type=simple
+   
+   Restart=always
+   WorkingDirectory=/www/wwwroot/epaybot
+   ExecStart=node app.js
+   
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   > 文件内容来源
+   >
+   > https://t.me/TalkToJshi/1902
+   
+9. ```shell
+    # 加载配置文件
+    sudo systemctl daemon-reload
+    # 启动服务
+    systemctl start epaybot.service
+    # 停止服务
+    systemctl stop epaybot.service
+    # 查看状态
+    systemctl status epaybot.service
+    # 设置开机启动（可选）
+    systemctl enable epaybot.service
+    ```
+
+
+
 
 ## 获得帮助
 

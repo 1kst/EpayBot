@@ -35,7 +35,7 @@ let notifyJob = schedule.scheduleJob(notify.notifyTime, () => {
   		tradeGroup.push(s.trade_no);
   		if(tgUsers.has(s.uid)){
 			let type = payType.has(s.type)?payType.get(s.type):"";
-			Telebot.bot.sendMessage(tgUsers.get(s.uid),type+"收款提醒！\n💰金额："+s.money+"\n🔗订单号:"+s.trade_no+"\n⚖️商品名:"+name);
+			Telebot.bot.sendMessage(tgUsers.get(s.uid),type+"收款提醒！\n💰金额："+s.money+"\n🔗订单号:"+s.trade_no+"\n⚖️商品名:"+s.name);
   		}
   	})
   	db("UPDATE `pay_order` SET `param` = '1' WHERE trade_no in ("+tradeGroup+")")
