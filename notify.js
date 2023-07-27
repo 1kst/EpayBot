@@ -8,12 +8,19 @@ const {notify} = require("./config.js");
 let notifyJob = schedule.scheduleJob(notify.notifyTime, () => {
   console.log("订单通知任务"+new Date());
   let tgUsers =  new Map();
+  let payType =  new Map();
   db("SELECT uid,phone FROM pay_user WHERE length(phone)>0")
   .then((users)=>{
   	users.forEach((user)=>{
   		tgUsers.set(user.uid,user.phone);
   	})
-  })
+  });
+  db("SELECT * FROM pay_type")
+  .then((types)=>{
+  	types.forEach((type)=>{
+  		payType.set(type.id,type.showname);
+  	})
+  });
   let today = moment();
   let pretime = today.subtract(notify.time, notify.timeUnit).format('YYYY-MM-DD HH:mm:ss');
   db("SELECT * FROM pay_order WHERE endtime >= ? AND param is NULL ORDER BY trade_no ASC Limit "+notify.count
@@ -27,8 +34,8 @@ let notifyJob = schedule.scheduleJob(notify.notifyTime, () => {
   	r.forEach((s)=>{
   		tradeGroup.push(s.trade_no);
   		if(tgUsers.has(s.uid)){
-			Telebot.bot.sendMessage(tgUsers.get(s.uid),"到账提醒！\n金额："+s.money+"\n订单号:"+s.trade_no);
-  			// console.log("到账提醒！\n金额："+s.money+"\n订单号:"+s.trade_no,tgUsers.get(s.uid))
+			let type = payType.has(s.type)?payType.get(s.type):"";
+			Telebot.bot.sendMessage(tgUsers.get(s.uid),type+"收款提醒！\n金额："+s.money+"\n订单号:"+s.trade_no+"\n商品名:"+name);
   		}
   	})
   	db("UPDATE `pay_order` SET `param` = '1' WHERE trade_no in ("+tradeGroup+")")
