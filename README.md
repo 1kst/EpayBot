@@ -86,6 +86,12 @@
 
    **==请认真阅读config.js里面的注释==**
 
+   ```shell
+   #安装依赖模块
+   cd /www/wwwroot/epaybot
+   npm install
+   ```
+
 6. ```shell
    #创建/etc/systemd/system/epaybot.service文件并在文件填写以下内容
    #以nano为例
