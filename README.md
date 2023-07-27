@@ -153,7 +153,13 @@ https://t.me/TalkToJshi
 
 ### 错误处理
 
-1. 以下为数据库链接错误，请检查config.js里的数据库配置
+1. /start 命令返回空白、无响应。
+
+   检查该机器人是否绑定多个程序，若有请取消其他程序。
+
+   然后重启程序。
+
+2. 以下为数据库链接错误，请检查config.js里的数据库配置
 
    ```shell
    2023-07-15T16:53:40:   code: 'PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR',
@@ -172,7 +178,7 @@ https://t.me/TalkToJshi
    2023-07-15T16:53:41:     at Timeout._onTimeout (/www/wwwroot/epaybot/node_modules/node-schedule/lib/
    ```
 
-2. 开启了代理，修改config.js里的proxy
+3. 开启了代理，修改config.js里的proxy
 
    <img src="README.assets/image-20230715170829685.png" alt="image-20230715170829685" style="zoom:33%;" />
 
