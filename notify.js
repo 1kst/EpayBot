@@ -35,7 +35,7 @@ let notifyJob = schedule.scheduleJob(notify.notifyTime, () => {
   		tradeGroup.push(s.trade_no);
   		if(tgUsers.has(s.uid)){
 			let type = payType.has(s.type)?payType.get(s.type):"";
-			Telebot.bot.sendMessage(tgUsers.get(s.uid),type+"收款提醒！\n金额："+s.money+"\n订单号:"+s.trade_no+"\n商品名:"+name);
+			Telebot.bot.sendMessage(tgUsers.get(s.uid),type+"收款提醒！\n💰金额："+s.money+"\n🔗订单号:"+s.trade_no+"\n⚖️商品名:"+name);
   		}
   	})
   	db("UPDATE `pay_order` SET `param` = '1' WHERE trade_no in ("+tradeGroup+")")
@@ -66,7 +66,10 @@ let settleJob = schedule.scheduleJob(notify.settleTime, ()=>{
 		r.forEach((s)=>{
 			settleGroup.push(s.id);
 			if(tgUsers.has(s.uid)){
-				Telebot.bot.sendMessage(tgUsers.get(s.uid),"结算提醒！\n结算账户"+s.account+"\n实际到账金额："+s.realmoney+"\n完成时间:"+s.endtime);
+				let nmessage = Telebot.bot.sendMessage(tgUsers.get(s.uid),"📣结算提醒！\n🔗结算账户"+s.account+"\n💵实际到账金额："+s.realmoney+"\n⏰完成时间:"+s.endtime);
+				nmessage.then((message)=>{
+					Telebot.bot.pinChatMessage(tgUsers.get(s.uid),message.message_id);
+				})
 			}
 		})
 		db("UPDATE `pay_settle` SET `result` = '1' WHERE id in ("+settleGroup+")")
